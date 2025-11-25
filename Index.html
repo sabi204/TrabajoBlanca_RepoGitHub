@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Escolar</title>
+   <style>
+    /* ===== Estilos generales ===== */
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(120deg, #89f7fe, #66a6ff);
+        padding: 20px;
+        margin: 0;
+        transition: background 0.5s;
+    }
+
+    h2 {
+        color: #333;
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* ===== Contenedor del formulario ===== */
+    form {
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 550px;
+        margin: auto;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    form:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    /* ===== Etiquetas y campos ===== */
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        color: #555;
+        font-size: 16px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        font-size: 15px;
+        transition: all 0.3s;
+    }
+
+    input:focus, select:focus {
+        border-color: #66a6ff;
+        box-shadow: 0 0 8px rgba(102,166,255,0.5);
+        outline: none;
+        transform: scale(1.02);
+    }
+
+    /* ===== Botón dinámico ===== */
+    button {
+        margin-top: 25px;
+        padding: 12px 20px;
+        background: linear-gradient(to right, #66a6ff, #89f7fe);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+        background: linear-gradient(to right, #89f7fe, #66a6ff);
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    /* ===== Menú horizontal dinámico ===== */
+    .menu {
+        width: 100%;
+        background-color: #333;
+        overflow: hidden;
+        text-align: center;
+        padding: 12px 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        margin-bottom: 30px;
+    }
+
+    .menu a {
+        display: inline-block;
+        color: white;
+        padding: 12px 22px;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+    .menu a:hover {
+        background: linear-gradient(to right, #66a6ff, #89f7fe);
+        color: #333;
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* ===== Contenido principal ===== */
+    .content {
+        margin-top: 20px;
+        padding: 10px;
+    }
+</style>
+
+</head>
+<body>
+     <h2>Formulario de Información Escolar</h2>
+
+    <!-- Menú horizontal -->
+    <div class="menu">
+        <a href="escolares.html">Escolares</a>
+        <a href="domicilio.html">Domicilio</a>
+        <a href="personales.html">Personales</a>
+        <a href="familiares.html">Familiares</a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="content">
+
+        <!-- Cambié action="#" por pagina2.html -->
+        <form action="Becas/guardar.php" method="post">
+            <label for="nombreEscuela">Nombre de la escuela:</label>
+            <input type="text" id="nombreEscuela" name="nombreEscuela" required>
+
+            <label for="direccion" id="domicilio">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" required>
+
+            <label for="carrera" id="personales">Carrera:</label>
+            <input type="text" id="carrera" name="carrera" required>
+
+            <label for="promedio">Promedio:</label>
+            <input type="number" id="promedio" name="promedio" step="0.01" min="0" max="10" required>
+
+            <label for="cct">CCT:</label>
+            <input type="text" id="cct" name="cct" required>
+
+            <label for="estado" id="familiares">Estado:</label>
+            <select id="estado" name="estado" required>
+                <option value="">Selecciona un estado</option>
+                <option value="aguascalientes">Aguascalientes</option>
+                <option value="bajacalifornia">Baja California</option>
+                <option value="cdmx">Ciudad de México</option>
+                <option value="chiapas">Chiapas</option>
+                <option value="jalisco">Jalisco</option>
+                <option value="nuevoleon">Nuevo León</option>
+                <option value="puebla">Puebla</option>
+                <option value="veracruz">Veracruz</option>
+                <!-- Agregar más estados -->
+            </select>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script>
+document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch("Becas/guardar.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("Guardado:", data);
+        window.location.href = "domicilio.html";
+    });
+});
+</script>
+
+</body>
+</html>

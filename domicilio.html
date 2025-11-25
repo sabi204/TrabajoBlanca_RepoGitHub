@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Domicilio</title>
+    <style>
+        body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(120deg, #89f7fe, #66a6ff);
+        padding: 20px;
+        margin: 0;
+        transition: background 0.5s;
+    }
+         h2 {
+        color: #333;
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+
+        /* === Menú en una sola línea === */
+         .menu {
+        width: 100%;
+        background-color: #333;
+        overflow: hidden;
+        text-align: center;
+        padding: 12px 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        margin-bottom: 30px;
+    }
+
+    .menu a {
+        display: inline-block;
+        color: white;
+        padding: 12px 22px;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+    .menu a:hover {
+        background: linear-gradient(to right, #66a6ff, #89f7fe);
+        color: #333;
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+        /* === Formulario dinámico === */
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            margin: 40px auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .form-container:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.6);
+            outline: none;
+            transform: scale(1.02);
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.4s, transform 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+    <h2>Formulario de Información de Domicilio</h2>
+
+    <!-- Menú superior -->
+    <div class="menu">
+         <a href="escolares.html">Escolares</a>
+        <a href="domicilio.html">Domicilio</a>
+        <a href="personales.html">Personales</a>
+        <a href="familiares.html">Familiares</a>
+    </div>
+
+    <!-- Formulario -->
+    <div class="form-container">
+        <h2 id="domicilio">Datos de Domicilio</h2>
+        <form action="Becas/guardar.php" method="post">
+            <label for="calle">Calle:</label>
+            <input type="text" id="calle" name="calle" required>
+
+            <label for="numero">Número:</label>
+            <input type="text" id="numero" name="numero" required>
+
+            <label for="colonia">Colonia:</label>
+            <input type="text" id="colonia" name="colonia" required>
+
+            <label for="ciudad">Ciudad o Localidad:</label>
+            <input type="text" id="ciudad" name="ciudad" required>
+
+            <label for="estado">Estado:</label>
+            <select id="estado" name="estado" required>
+                <option value="">Seleccione un estado</option>
+                <option value="cdmx">Ciudad de México</option>
+                <option value="jalisco">Jalisco</option>
+                <option value="nuevoleon">Nuevo León</option>
+                <option value="puebla">Puebla</option>
+                <option value="veracruz">Veracruz</option>
+                <option value="veracruz">Guerrero</option>
+            </select>
+
+            <label for="cp">Código Postal:</label>
+            <input type="text" id="cp" name="cp" required>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+<script>
+document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch("Becas/guardar.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("Guardado:", data);
+        window.location.href = "personales.html";
+    });
+});
+</script>
+
+</body>
+</html>

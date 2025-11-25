@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Datos Personales</title>
+    <style>
+        /* Estilos generales */
+        body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(120deg, #89f7fe, #66a6ff);
+        padding: 20px;
+        margin: 0;
+        transition: background 0.5s;
+    }
+        h2 {
+        color: #333;
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+        /* === Menú en una sola línea === */
+        .menu {
+        width: 100%;
+        background-color: #333;
+        overflow: hidden;
+        text-align: center;
+        padding: 12px 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        margin-bottom: 30px;
+    }
+
+    .menu a {
+        display: inline-block;
+        color: white;
+        padding: 12px 22px;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+    .menu a:hover {
+        background: linear-gradient(to right, #66a6ff, #89f7fe);
+        color: #333;
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+        /* Contenedor del formulario */
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Estilos de los campos */
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 8px rgba(37,117,252,0.5);
+            outline: none;
+        }
+
+        /* Botón de envío */
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            background: #2575fc;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #6a11cb;
+        }
+    </style>
+</head>
+<body>
+    <h2>Formulario de Información Personal</h2>
+    <!-- Menú -->
+   <div class="menu">
+         <a href="escolares.html">Escolares</a>
+        <a href="domicilio.html">Domicilio</a>
+        <a href="personales.html">Personales</a>
+        <a href="familiares.html">Familiares</a>
+    </div>
+
+    <!-- Formulario -->
+    <div class="container">
+        <h2>Datos Personales</h2>
+        <form action="Becas/guardar.php" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" required>
+
+            <label for="genero">Género:</label>
+            <select id="genero" name="genero" required>
+                <option value="">Seleccione</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script>
+document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch("Becas/guardar.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("Guardar:", data);
+        window.location.href = "familiares.html";
+    });
+});
+</script>
+
+</body>
+</html>
